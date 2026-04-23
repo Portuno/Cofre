@@ -29,32 +29,49 @@ export interface Config {
   };
 }
 
-export const config: Config = {
-  database: {
-    url: process.env.DATABASE_URL || '',
-  },
-  supabase: {
-    url: process.env.SUPABASE_URL || '',
-    key: process.env.SUPABASE_KEY || '',
-  },
-  gemini: {
-    apiKey: process.env.GEMINI_API_KEY || '',
-    embeddingModel: process.env.EMBEDDING_MODEL || 'text-embedding-004',
-    llmModel: process.env.LLM_MODEL || 'gemini-1.5-flash',
-  },
-  elevenlabs: {
-    apiKey: process.env.ELEVENLABS_API_KEY || '',
-  },
-  app: {
-    env: (process.env.NODE_ENV as any) || 'development',
-    addr: process.env.API_ADDR || 'http://localhost:3000',
-    port: parseInt(process.env.PORT || '3000', 10),
-    logLevel: process.env.RUST_LOG || 'info',
-  },
-  similarity: {
-    threshold: parseFloat(process.env.SIMILARITY_THRESHOLD || '0.8'),
-  },
-};
+function getConfig(): Config {
+  const databaseUrl = process.env.DATABASE_URL || '';
+  const supabaseUrl = process.env.SUPABASE_URL || '';
+  const supabaseKey = process.env.SUPABASE_KEY || '';
+  const geminiApiKey = process.env.GEMINI_API_KEY || '';
+  const embeddingModel = process.env.EMBEDDING_MODEL || 'text-embedding-004';
+  const llmModel = process.env.LLM_MODEL || 'gemini-1.5-flash';
+  const elevenlabsApiKey = process.env.ELEVENLABS_API_KEY || '';
+  const nodeEnv = process.env.NODE_ENV || 'development';
+  const apiAddr = process.env.API_ADDR || 'http://localhost:3000';
+  const port = parseInt(process.env.PORT || '3000', 10);
+  const logLevel = process.env.RUST_LOG || 'info';
+  const similarityThreshold = parseFloat(process.env.SIMILARITY_THRESHOLD || '0.8');
+
+  return {
+    database: {
+      url: databaseUrl,
+    },
+    supabase: {
+      url: supabaseUrl,
+      key: supabaseKey,
+    },
+    gemini: {
+      apiKey: geminiApiKey,
+      embeddingModel: embeddingModel,
+      llmModel: llmModel,
+    },
+    elevenlabs: {
+      apiKey: elevenlabsApiKey,
+    },
+    app: {
+      env: nodeEnv as any,
+      addr: apiAddr,
+      port: port,
+      logLevel: logLevel,
+    },
+    similarity: {
+      threshold: similarityThreshold,
+    },
+  };
+}
+
+export const config = getConfig();
 
 export function validateConfig(): void {
   const required = [
