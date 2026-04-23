@@ -22,7 +22,7 @@
     "cors": "^2.8.5",
     "helmet": "^7.1.0",
     "express-rate-limit": "^7.1.5",
-    "jsonwebtoken": "^9.1.2",
+    "jsonwebtoken": "^9.0.2",
     "uuid": "^9.0.1",
     "pino": "^8.17.2",
     "pino-pretty": "^10.3.1"
