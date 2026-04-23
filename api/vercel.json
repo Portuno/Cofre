@@ -1,0 +1,27 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_KEY": "@supabase_key",
+    "GEMINI_API_KEY": "@gemini_api_key",
+    "ELEVENLABS_API_KEY": "@elevenlabs_api_key",
+    "EMBEDDING_MODEL": "@embedding_model",
+    "LLM_MODEL": "@llm_model",
+    "SIMILARITY_THRESHOLD": "@similarity_threshold",
+    "NODE_ENV": "production"
+  },
+  "functions": {
+    "api/**/*.ts": {
+      "memory": 1024,
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
+}
