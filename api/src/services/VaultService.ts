@@ -85,7 +85,7 @@ export class VaultService {
         [userId]
       );
 
-      return result.rows.map((row) => ({
+      return result.rows.map((row: any) => ({
         vault: {
           id: row.id,
           name: row.name,

@@ -145,7 +145,7 @@ export class ContentService {
         params
       );
 
-      const items = result.rows.map((row) => ({
+      const items = result.rows.map((row: any) => ({
         ...row,
         metadata: row.metadata ? JSON.parse(row.metadata) : undefined,
       }));

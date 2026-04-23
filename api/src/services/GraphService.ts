@@ -34,7 +34,7 @@ export class GraphService {
       }
 
       const contentResult = await query(contentQuery, params);
-      const contentItems: ContentItem[] = contentResult.rows.map((row) => ({
+      const contentItems: ContentItem[] = contentResult.rows.map((row: any) => ({
         ...row,
         metadata: row.metadata ? JSON.parse(row.metadata) : undefined,
       }));
@@ -127,7 +127,7 @@ export class GraphService {
         [contentItemId, limit]
       );
 
-      return result.rows.map((row) => ({
+      return result.rows.map((row: any) => ({
         ...row,
         metadata: row.metadata ? JSON.parse(row.metadata) : undefined,
       }));

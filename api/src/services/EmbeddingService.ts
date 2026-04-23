@@ -115,7 +115,7 @@ export class EmbeddingService {
         [vectorString, vaultId, threshold, limit]
       );
 
-      return result.rows.map((row) => row.content_item_id);
+      return result.rows.map((row: any) => row.content_item_id);
     } catch (error) {
       logger.error({ error }, 'Similarity search error');
       throw new AppError(500, 'SIMILARITY_SEARCH_ERROR', 'Failed to perform similarity search');

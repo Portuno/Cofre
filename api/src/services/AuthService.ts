@@ -11,7 +11,7 @@ export class AuthService {
   async signup(email: string, password: string): Promise<AuthToken> {
     try {
       // Create user in Supabase Auth
-      const { data, error } = await supabase.auth.signUpWithPassword({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
