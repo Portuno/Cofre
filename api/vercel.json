@@ -13,15 +13,9 @@
     "NODE_ENV": "production"
   },
   "functions": {
-    "api/**/*.ts": {
+    "dist/index.js": {
       "memory": 1024,
       "maxDuration": 60
     }
-  },
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
-    }
-  ]
+  }
 }
