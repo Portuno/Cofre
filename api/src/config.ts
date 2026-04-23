@@ -29,42 +29,30 @@ export interface Config {
   };
 }
 
-function getRequiredEnv(key: string): string {
-  const value = process.env[key];
-  if (!value) {
-    throw new Error(`Missing required environment variable: ${key}`);
-  }
-  return value;
-}
-
-function getOptionalEnv(key: string, defaultValue: string): string {
-  return process.env[key] || defaultValue;
-}
-
 export const config: Config = {
   database: {
-    url: getRequiredEnv('DATABASE_URL'),
+    url: process.env.DATABASE_URL || '',
   },
   supabase: {
-    url: getRequiredEnv('SUPABASE_URL'),
-    key: getRequiredEnv('SUPABASE_KEY'),
+    url: process.env.SUPABASE_URL || '',
+    key: process.env.SUPABASE_KEY || '',
   },
   gemini: {
-    apiKey: getRequiredEnv('GEMINI_API_KEY'),
-    embeddingModel: getOptionalEnv('EMBEDDING_MODEL', 'text-embedding-004'),
-    llmModel: getOptionalEnv('LLM_MODEL', 'gemini-1.5-flash'),
+    apiKey: process.env.GEMINI_API_KEY || '',
+    embeddingModel: process.env.EMBEDDING_MODEL || 'text-embedding-004',
+    llmModel: process.env.LLM_MODEL || 'gemini-1.5-flash',
   },
   elevenlabs: {
-    apiKey: getRequiredEnv('ELEVENLABS_API_KEY'),
+    apiKey: process.env.ELEVENLABS_API_KEY || '',
   },
   app: {
     env: (process.env.NODE_ENV as any) || 'development',
-    addr: getOptionalEnv('API_ADDR', 'http://localhost:3000'),
+    addr: process.env.API_ADDR || 'http://localhost:3000',
     port: parseInt(process.env.PORT || '3000', 10),
-    logLevel: getOptionalEnv('RUST_LOG', 'info'),
+    logLevel: process.env.RUST_LOG || 'info',
   },
   similarity: {
-    threshold: parseFloat(getOptionalEnv('SIMILARITY_THRESHOLD', '0.8')),
+    threshold: parseFloat(process.env.SIMILARITY_THRESHOLD || '0.8'),
   },
 };
 
